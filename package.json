@@ -1,0 +1,28 @@
+{
+  "name": "clone-stack-overflow",
+  "version": "1.0.0",
+  "description": "A project to clone basic feature of stackoverflow",
+  "author": "manhcuong",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
+    "build": "nuxt build",
+    "start": "cross-env NODE_ENV=production node server/index.js",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.3.6",
+    "cross-env": "^5.2.0",
+    "express": "^4.16.4",
+    "firebase": "^5.11.1",
+    "mysql": "^2.17.1",
+    "nuxt": "^2.4.0",
+    "vuetify": "^1.5.5",
+    "vuetify-loader": "^1.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2"
+  }
+}
