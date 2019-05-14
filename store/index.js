@@ -1,3 +1,5 @@
+import firebase from '~/plugins/firebase.js';
+
 export const state = () => ({
   user: null
 })
@@ -20,5 +22,14 @@ export const mutations = {
 export const actions = {
   setUser ({ commit }, user){
     commit('setUser', user)
+  },
+  login (email, password) {
+    return new Promise((resolve, reject) => {
+      console.log("Email: " +  email)
+      console.log("Password: " +  password)
+      firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(() => resolve())
+        .catch((err) => reject(err))
+    })
   }
 }
