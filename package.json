@@ -17,8 +17,10 @@
     "firebase": "^5.11.1",
     "mysql": "^2.17.1",
     "nuxt": "^2.4.0",
+    "nuxt-vuex-localstorage": "^1.2.6",
     "vuetify": "^1.5.5",
-    "vuetify-loader": "^1.2.1"
+    "vuetify-loader": "^1.2.1",
+    "vuex-persist": "^2.0.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.9",

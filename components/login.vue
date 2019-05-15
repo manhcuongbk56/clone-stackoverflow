@@ -30,21 +30,24 @@
   import { mapActions } from 'vuex';
   export default {
     name: "login",
-    methods:
-      mapActions([
-        'login',
+    methods: {
+      ...mapActions([
+        'userLogin',
+        'setUser'
       ]),
       loginFirebase () {
-        console.log("Email: " +  email)
-        console.log("Password: " +  password)
-         this.login(this.email, this.password)
-           .then(() => console.log("SUCCESSSSSSSSSSSSSSSSSSS"))
-           .catch((err) => {
-             console.log(err);
-             console.log("LOL")
-           })
+        this.userLogin({
+          email: this.email,
+          password: this.password
+        } ).then(() => {
+          console.log(this.$router);
+          this.$router.push('/')
+        })
+        .catch((error) => {
+          console.log(error)
+        })
       }
-    ,
+    },
     data: () => {
       return {
         email: '',

@@ -1,35 +1,48 @@
 import firebase from '~/plugins/firebase.js';
-
+// import { firebaseMutations, firebaseAction } from 'vuexfire'
 export const state = () => ({
-  user: null
-})
+  user: {}
+});
 
 export const getters = {
-  isAuthenticated: state => {
-    console.log("USERRRRR");
-    console.log(state.user);
-    return !!state.user;
+  isAuthenticated: (state) => () => {
+    console.log("Current user in state: " + state.user.user)
+    return !!state.user.user;
   }
-}
+};
 
 export const mutations = {
-  setUser(state, user) {
-    console.log("SETUSERRRRRRRRRRRRRRR");
-    state.user = user;
+  setUser(state, payload) {
+    // Vue.set()
+    console.log( "Payload: " + payload.user);
+    console.log( "Before set: " +state.user.user);
+    Object.assign(state.user, payload);
+    console.log( "After set: " + state.user.user)
+  },
+  reset(state, payload) {
+    // Vue.set()
+    console.log( "Payload: " + payload.user);
+    console.log( "Before set: " +state.user.user);
+    state.user = payload;
+    console.log( "After set: " + state.user.user)
   }
-}
+};
 
 export const actions = {
-  setUser ({ commit }, user){
-    commit('setUser', user)
+  userLogin ({ commit }, account) {
+    return firebase.auth()
+      .signInWithEmailAndPassword(account.email, account.password)
+      .then(payload => {
+        console.log(account);
+        return  this.dispatch('setUser', payload)
+        // commit('setUser', payload)
+        // console.log("aaaaaaaaaaaaaaaaaa")
+      })
   },
-  login (email, password) {
-    return new Promise((resolve, reject) => {
-      console.log("Email: " +  email)
-      console.log("Password: " +  password)
-      firebase.auth().signInWithEmailAndPassword(email, password)
-        .then(() => resolve())
-        .catch((err) => reject(err))
-    })
+  setUser({commit}, user1) {
+    commit('setUser', user1)
+  },
+  resetUser({commit}){
+    commit('reset', {})
   }
-}
+};
